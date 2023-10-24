@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plánovač Událostí</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        .event {
+            text-align: center;
+            border: 1px solid #ccc;
+            margin: 5px;
+            padding: 10px;
+            display: inline-block;
+        }
+
+        .event div {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Plánovač Událostí</h1>
+    <form id="eventForm">
+        <label for="eventCount">Počet událostí:</label>
+        <input type="number" id="eventCount" min="1">
+        <button type="submit">Vytvořit</button>
+    </form>
+    <div id="eventContainer"></div>
+
+    <script>
+        const eventForm = document.getElementById('eventForm');
+        const eventCountInput = document.getElementById('eventCount');
+        const eventContainer = document.getElementById('eventContainer');
+
+        eventForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const eventCount = parseInt(eventCountInput.value, 10);
+            createEvents(eventCount);
+        });
+
+        function createEvents(count) {
+            eventContainer.innerHTML = '';
+
+            for (let i = 1; i <= count; i++) {
+                const event = document.createElement('div');
+                event.classList.add('event');
+                event.id = `event${i}`;
+                const contentDiv = document.createElement('div');
+                contentDiv.contentEditable = true;
+                contentDiv.textContent = `Událost ${i}`;
+                contentDiv.addEventListener('input', function () {
+
+                });
+                event.appendChild(contentDiv);
+
+                eventContainer.appendChild(event);
+            }
+        }
+    </script>
+</body>
+</html>
